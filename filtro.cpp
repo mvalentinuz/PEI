@@ -5,7 +5,7 @@ Filtro::Filtro()
 
 }
 
-void Filtro::filtrar(Imagen *imagen)
+void Filtro::filtrar(Imagen *punteroImagen)
 {
 
 }

@@ -49,8 +49,8 @@ void Expositor::keyPressEvent(QKeyEvent *evento)
     bool imagenAnterior = evento->modifiers() & Qt::ControlModifier and evento->key() == Qt::Key_Left;
     if(imagenAnterior)
     {
-        gestor->cambiarArchivoActual(false);
-        gestor->leerArchivo(&imagen);
+        punteroGestor->cambiarArchivoActual(false);
+        punteroGestor->leerArchivo(&imagen);
         editor.setImagen(&imagen);
         analizador.setImagen(&imagen);
         update();
@@ -59,8 +59,8 @@ void Expositor::keyPressEvent(QKeyEvent *evento)
     bool imagenSiguiente = evento->modifiers()&Qt::ControlModifier && evento->key() == Qt::Key_Right;
     if(imagenSiguiente)
     {
-        gestor->cambiarArchivoActual(true);
-        gestor->leerArchivo(&imagen);
+        punteroGestor->cambiarArchivoActual(true);
+        punteroGestor->leerArchivo(&imagen);
         editor.setImagen(&imagen);
         analizador.setImagen(&imagen);
         update();
@@ -73,6 +73,25 @@ void Expositor::keyPressEvent(QKeyEvent *evento)
         {
             analizador.analizar();
             analizador.generarDatosDeHistograma();
+            if(imagen.getId()=="P3" || imagen.getId()=="P6")
+            {
+                cout<<endl<<"DATOS ESTADISTICOS: "<<endl;
+                cout<<"Promedio R: "<<analizador.getPromedioR()<<" Promedio G: "<<analizador.getPromedioG()<<" Promedio B: "<<analizador.getPromedioB()<<endl;
+                cout<<"Desvio R: "<<analizador.getDesvioEstandarR()<<" Desvio G: "<<analizador.getDesvioEstandarG()<<" Desvio B: "<<analizador.getDesvioEstandarB()<<endl;
+                cout<<"Moda R: "<<analizador.getModaR()<<" Moda G: "<<analizador.getModaG()<<" Moda B: "<<analizador.getModaB()<<endl;
+                cout<<"Maximo R: "<<analizador.getMaximoR()<<" Maximo G: "<<analizador.getMaximoG()<<" Maximo B: "<<analizador.getMaximoB()<<endl;
+                cout<<"Minimo R: "<<analizador.getMinimoR()<<" Minimo G: "<<analizador.getMinimoG()<<" Minimo B: "<<analizador.getMinimoB()<<endl<<endl;
+            }
+            else
+            {
+                cout<<endl<<"DATOS ESTADISTICOS: "<<endl;
+                cout<<"Promedio: "<<analizador.getPromedioIntensidad()<<endl;
+                cout<<"Desvio: "<<analizador.getDesvioEstandarIntensidad()<<endl;
+                cout<<"Moda: "<<analizador.getModaIntensidad()<<endl;
+                cout<<"Maximo: "<<analizador.getMaximoIntensidad()<<endl;
+                cout<<"Minimo: "<<analizador.getMinimoIntensidad()<<endl;
+            }
+
             mostrarHistograma = true;
             update();
         }
@@ -93,7 +112,7 @@ void Expositor::keyPressEvent(QKeyEvent *evento)
         if(formato == "aic")
         {
             ID = "P2C";
-            gestor->guardarArchivo(&imagen, nombre, formato, ID);
+            punteroGestor->guardarArchivo(&imagen, nombre, formato, ID);
         }
         else if (formato == "pnm" || formato == "pgm" || formato == "pbm" || formato == "ppm")
         {
@@ -105,7 +124,7 @@ void Expositor::keyPressEvent(QKeyEvent *evento)
             cout<<"P5: es un archivo de imagen en escala de grises y pixeles en binario."<<endl;
             cout<<"P6: es un archivo de imagen color RGB y pixeles en binario."<<endl<<endl;
             cin>>ID;
-            gestor->guardarArchivo(&imagen, nombre, formato, ID);
+            punteroGestor->guardarArchivo(&imagen, nombre, formato, ID);
         }
         else
         {
@@ -116,14 +135,14 @@ void Expositor::keyPressEvent(QKeyEvent *evento)
     bool aplicarLUT1 = evento->modifiers() & Qt::ControlModifier && evento->key() == Qt::Key_1;
     if(aplicarLUT1)
     {
-        editor.pseudocolorear(gestor->getRutaDirectorio()+"//grupo_luts//Turbo.lut");
+        editor.pseudocolorear(punteroGestor->getRutaDirectorio()+"/grupo_luts/Turbo.lut");
         update();
     }
 
     bool aplicarLUT2 = evento->modifiers() & Qt::ControlModifier && evento->key() == Qt::Key_2;
     if(aplicarLUT2)
     {
-        editor.pseudocolorear(gestor->getRutaDirectorio()+"//grupo_luts//glow.lut");
+        editor.pseudocolorear(punteroGestor->getRutaDirectorio()+"/grupo_luts/glow.lut");
         update();
     }
 
@@ -185,33 +204,38 @@ void Expositor::mousePressEvent(QMouseEvent *evento)
 {
     bool detectarRegion = (evento->modifiers() & Qt::ControlModifier) and evento->button() == Qt::LeftButton;
 
-    int f = this->mapFromGlobal(QCursor::pos()).x();
-    int c = this->mapFromGlobal(QCursor::pos()).y();
+    int f = this->mapFromGlobal(QCursor::pos()).y();
+    int c = this->mapFromGlobal(QCursor::pos()).x();
 
     if(detectarRegion)
     {
-        f= (f - desplx)/escala;
-        c= (c - desply)/escala;
+        f= (f - desply)/escala;
+        c= (c - desplx)/escala;
 
         int tolerancia;
         cout<<"Ingrese la tolerancia a considerar: "<<endl;
+
         cin>>tolerancia;
 
         analizador.detectarRegion(f, c, tolerancia);
         editor.colorearSuperficie(analizador.getRegionDetectada());
 
-        cout<<"El área detectada en unidades de píxeles es "<<analizador.getAreaMapeada()<<" px."<<endl;
+        cout<<"El area detectada en unidades de pixeles es "<<analizador.getAreaMapeada()<<" px."<<endl;
 
         update();
 
-     }
+    }
 }
 
-
-Expositor::Expositor(GestorDeArchivos *pGestor)
+Expositor::Expositor()
 {
-    gestor = pGestor;
-    gestor->leerArchivo(&imagen);
+
+}
+
+void Expositor::setGestor(GestorDeArchivos *newPunteroGestor)
+{
+    punteroGestor = newPunteroGestor;
+    punteroGestor->leerArchivo(&imagen);
     analizador.setImagen(&imagen);
     editor.setImagen(&imagen);
 }
@@ -239,10 +263,10 @@ void Expositor::exponer()
             pixel=imagen.getPixel(f,c);
             glColor3f((float)pixel.getR()/(float)imagen.getValorMaximo(), (float)pixel.getG()/(float)imagen.getValorMaximo(), (float)pixel.getB()/(float)imagen.getValorMaximo());
 
-            glVertex3i(c+1, imagen.getFilas()-f,0);
+            glVertex3i(c+1, imagen.getFilas()-f-1,0);
+            glVertex3i(c, imagen.getFilas()-f-1,0);
             glVertex3i(c, imagen.getFilas()-f,0);
-            glVertex3i(c, imagen.getFilas()-f+1,0);
-            glVertex3i(c+1, imagen.getFilas()-f+1,0);
+            glVertex3i(c+1, imagen.getFilas()-f,0);
         }
     }
     glEnd();
@@ -255,7 +279,7 @@ void Expositor::graficarHistograma()
     {
         glClear(GL_COLOR_BUFFER_BIT);
         glPushMatrix();
-        glScalef(width()/256.0f, height()/(analizador.getMayorFrecuenciaModaRGB()*1.0f), 0.0f);
+        glScalef(width()/256.0f, height()/(analizador.getMayorFrecuenciaRGB()*1.0f), 0.0f);
         vector<int> funcionRojos = analizador.getFuncionRojos();
         vector<int> funcionVerdes = analizador.getFuncionVerdes();
         vector<int> funcionAzules = analizador.getFuncionAzules();
@@ -298,7 +322,7 @@ void Expositor::graficarHistograma()
     {
         glClear(GL_COLOR_BUFFER_BIT);
         glPushMatrix();
-        glScalef(width()/256.0f, height()/(analizador.getFrecuenciaModa()*1.0f), 0.0f);
+        glScalef(width()/256.0f, height()/(analizador.getMayorFrecuenciaIntensidad()*1.0f), 0.0f);
 
         vector<int> funcionIntensidades = analizador.getFuncionIntensidades();
         for (unsigned int i=0; i<funcionIntensidades.size(); i++)

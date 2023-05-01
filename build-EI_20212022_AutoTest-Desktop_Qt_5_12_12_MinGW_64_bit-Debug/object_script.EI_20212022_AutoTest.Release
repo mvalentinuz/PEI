@@ -1,0 +1,15 @@
+release/tst_ei_autotest.o
+release/aic.o
+release/analizador.o
+release/archivo.o
+release/editor.o
+release/expositor.o
+release/filtro.o
+release/gestordearchivos.o
+release/imagen.o
+release/interfaz.o
+release/lut.o
+release/mediana.o
+release/pasabajos.o
+release/pixel.o
+release/pnm.o

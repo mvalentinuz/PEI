@@ -5,9 +5,9 @@ Editor::Editor()
 
 }
 
-void Editor::setImagen(Imagen *newImagen)
+void Editor::setImagen(Imagen *newPunteroImagen)
 {
-    imagen = newImagen;
+    punteroImagen = newPunteroImagen;
 }
 
 void Editor::pseudocolorear(string rutaLUT)
@@ -16,57 +16,57 @@ void Editor::pseudocolorear(string rutaLUT)
     vector<vector<int>> tabla = lut.getTabla();
     Pixel pixel;
 
-    for(int f=0; f<imagen->getFilas(); f++)
+    for(int f=0; f<punteroImagen->getFilas(); f++)
     {
-        for(int c=0; c<imagen->getColumnas(); c++)
+        for(int c=0; c<punteroImagen->getColumnas(); c++)
         {
-            pixel = imagen->getPixel(f,c);
-            imagen->modificaPixeldeMatriz(f, c, tabla[pixel.getR()][1], tabla[pixel.getG()][2], tabla[pixel.getB()][3]);
+            pixel = punteroImagen->getPixel(f,c);
+            punteroImagen->modificaPixeldeMatriz(f, c, tabla[pixel.getR()][1], tabla[pixel.getG()][2], tabla[pixel.getB()][3]);
         }
     }
 }
 
 void Editor::aplicarMediana()
 {
-    filtro = new Mediana;
+    punteroFiltro = new Mediana;
 
-    filtro->filtrar(imagen);
+    punteroFiltro->filtrar(punteroImagen);
 
-    delete filtro;
+    delete punteroFiltro;
 }
 
 void Editor::aplicarPasaBajos()
 {
-    filtro = new PasaBajos;
+    punteroFiltro = new PasaBajos;
 
-    filtro->filtrar(imagen);
+    punteroFiltro->filtrar(punteroImagen);
 
-    delete filtro;
+    delete punteroFiltro;
 }
 
 void Editor::ajustarBrillo(int cantidad)
 {
     Pixel pixel;
-    for(int fila=0; fila<imagen->getFilas(); fila++)
+    for(int fila=0; fila<punteroImagen->getFilas(); fila++)
     {
-        for(int columna=0; columna<imagen->getColumnas(); columna++)
+        for(int columna=0; columna<punteroImagen->getColumnas(); columna++)
         {
-            pixel = imagen->getPixel(fila, columna);
-            imagen->modificaPixeldeMatriz(fila, columna, pixel.getR()+cantidad, pixel.getG()+cantidad, pixel.getB()+cantidad);
+            pixel = punteroImagen->getPixel(fila, columna);
+            punteroImagen->modificaPixeldeMatriz(fila, columna, pixel.getR()+cantidad, pixel.getG()+cantidad, pixel.getB()+cantidad);
         }
     }
 }
 
 void Editor::ajustarContraste()
 {
-    Pixel pixel = imagen->getPixel(0,0);
+    Pixel pixel = punteroImagen->getPixel(0,0);
     int minimoR = pixel.getR(), minimoG = pixel.getG(), minimoB = pixel.getB(), maximoR = pixel.getR(), maximoG = pixel.getG(), maximoB = pixel.getB();
 
-    for(int fila=0; fila<imagen->getFilas(); fila++)
+    for(int fila=0; fila<punteroImagen->getFilas(); fila++)
     {
-        for(int columna=0; columna<imagen->getColumnas(); columna++)
+        for(int columna=0; columna<punteroImagen->getColumnas(); columna++)
         {
-            pixel = imagen->getPixel(fila, columna);
+            pixel = punteroImagen->getPixel(fila, columna);
 
             if(minimoR>pixel.getR())
             {
@@ -99,15 +99,15 @@ void Editor::ajustarContraste()
 
     int R=0, G=0, B=0;
 
-    for(int fila=0; fila<imagen->getFilas(); fila++)
+    for(int fila=0; fila<punteroImagen->getFilas(); fila++)
     {
-        for(int columna=0; columna<imagen->getColumnas(); columna++)
+        for(int columna=0; columna<punteroImagen->getColumnas(); columna++)
         {
-            pixel = imagen->getPixel(fila, columna);
-            R = (float)(pixel.getR() - minimoR)/(maximoR - minimoR)*(imagen->getValorMaximo());
-            G = (float)(pixel.getG() - minimoG)/(maximoG - minimoG)*(imagen->getValorMaximo());
-            B = (float)(pixel.getB() - minimoB)/(maximoB - minimoB)*(imagen->getValorMaximo());
-            imagen->modificaPixeldeMatriz(fila, columna, R, G, B);
+            pixel = punteroImagen->getPixel(fila, columna);
+            R = (float)(pixel.getR() - minimoR)/(maximoR - minimoR)*(punteroImagen->getValorMaximo());
+            G = (float)(pixel.getG() - minimoG)/(maximoG - minimoG)*(punteroImagen->getValorMaximo());
+            B = (float)(pixel.getB() - minimoB)/(maximoB - minimoB)*(punteroImagen->getValorMaximo());
+            punteroImagen->modificaPixeldeMatriz(fila, columna, R, G, B);
         }
     }
 
@@ -118,12 +118,12 @@ void Editor::aplicarNegativo()
 {
     Pixel pixel;
 
-    for(int fila=0; fila<imagen->getFilas(); fila++)
+    for(int fila=0; fila<punteroImagen->getFilas(); fila++)
     {
-        for(int columna=0; columna<imagen->getColumnas(); columna++)
+        for(int columna=0; columna<punteroImagen->getColumnas(); columna++)
         {
-            pixel = imagen->getPixel(fila, columna);
-            imagen->modificaPixeldeMatriz(fila, columna, imagen->getValorMaximo()-pixel.getR(), imagen->getValorMaximo()-pixel.getG(), imagen->getValorMaximo()-pixel.getB());
+            pixel = punteroImagen->getPixel(fila, columna);
+            punteroImagen->modificaPixeldeMatriz(fila, columna, punteroImagen->getValorMaximo()-pixel.getR(), punteroImagen->getValorMaximo()-pixel.getG(), punteroImagen->getValorMaximo()-pixel.getB());
         }
     }
 }
@@ -133,20 +133,20 @@ void Editor::binarizar(int intensidad)
     Pixel pixel;
     int promedio;
 
-    for(int fila=0; fila<imagen->getFilas(); fila++)
+    for(int fila=0; fila<punteroImagen->getFilas(); fila++)
     {
-        for(int columna=0; columna<imagen->getColumnas(); columna++)
+        for(int columna=0; columna<punteroImagen->getColumnas(); columna++)
         {
-            pixel = imagen->getPixel(fila, columna);
+            pixel = punteroImagen->getPixel(fila, columna);
             promedio = (pixel.getR()+pixel.getG()+pixel.getB())/3;
 
             if(promedio<=intensidad)
             {
-               imagen->modificaPixeldeMatriz(fila, columna, 0, 0, 0);
+               punteroImagen->modificaPixeldeMatriz(fila, columna, 0, 0, 0);
             }
             else
             {
-               imagen->modificaPixeldeMatriz(fila, columna, 255, 255, 255);
+               punteroImagen->modificaPixeldeMatriz(fila, columna, 255, 255, 255);
             }
         }
     }
@@ -154,14 +154,13 @@ void Editor::binarizar(int intensidad)
 
 void Editor::colorearSuperficie(vector<vector<bool>> region)
 {
-
-    for(int fila=0; fila<imagen->getFilas(); fila++)
+    for(int fila=0; fila<punteroImagen->getFilas(); fila++)
     {
-        for(int columna=0; columna<imagen->getColumnas(); columna++)
+        for(int columna=0; columna<punteroImagen->getColumnas(); columna++)
         {
             if(region[fila][columna])
             {
-                imagen->modificaPixeldeMatriz(fila, columna, 0, 0, 255);
+                punteroImagen->modificaPixeldeMatriz(fila, columna, 0, 0, 255);
             }
         }
     }

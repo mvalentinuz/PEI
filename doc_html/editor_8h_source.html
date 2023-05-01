@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto de Exámen Final de Programación Avanzada - FIUNER: Fichero Fuente editor.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Proyecto de Exámen Final de Programación Avanzada - FIUNER
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.14 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('editor_8h_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">editor.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="editor_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifndef EDITOR_H</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define EDITOR_H</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;iostream&quot;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="imagen_8h.html">imagen.h</a>&quot;</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="lut_8h.html">lut.h</a>&quot;</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pixel_8h.html">pixel.h</a>&quot;</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="analizador_8h.html">analizador.h</a>&quot;</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="filtro_8h.html">filtro.h</a>&quot;</span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mediana_8h.html">mediana.h</a>&quot;</span></div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pasabajos_8h.html">pasabajos.h</a>&quot;</span></div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_editor.html">   31</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_editor.html">Editor</a></div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">private</span>:</div><div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_editor.html#a9ad63bfc2223205351c1faba4b5da938">   34</a></span>&#160;    <a class="code" href="class_l_u_t.html">LUT</a> <a class="code" href="class_editor.html#a9ad63bfc2223205351c1faba4b5da938">lut</a>; </div><div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_editor.html#a6648240470ef6dccb12e5cb3b7c559fc">   35</a></span>&#160;    <a class="code" href="class_filtro.html">Filtro</a> *<a class="code" href="class_editor.html#a6648240470ef6dccb12e5cb3b7c559fc">punteroFiltro</a>; </div><div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_editor.html#ade0f9b096220a452744c3dcd36e54011">   36</a></span>&#160;    <a class="code" href="class_imagen.html">Imagen</a> *<a class="code" href="class_editor.html#ade0f9b096220a452744c3dcd36e54011">punteroImagen</a>; </div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_editor.html">Editor</a>();</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> setImagen(<a class="code" href="class_imagen.html">Imagen</a> *newPunteroImagen);</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> pseudocolorear(<span class="keywordtype">string</span> rutaLUT);</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> aplicarMediana();</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> aplicarPasaBajos();</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> ajustarBrillo(<span class="keywordtype">int</span> cantidad);</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> ajustarContraste();</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> aplicarNegativo();</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">void</span> binarizar(<span class="keywordtype">int</span> intensidad);</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> colorearSuperficie(vector&lt;vector&lt;bool&gt;&gt; region);</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    ~<a class="code" href="class_editor.html">Editor</a>();</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif // EDITOR_H</span></div><div class="ttc" id="analizador_8h_html"><div class="ttname"><a href="analizador_8h.html">analizador.h</a></div></div>
+<div class="ttc" id="class_editor_html_a6648240470ef6dccb12e5cb3b7c559fc"><div class="ttname"><a href="class_editor.html#a6648240470ef6dccb12e5cb3b7c559fc">Editor::punteroFiltro</a></div><div class="ttdeci">Filtro * punteroFiltro</div><div class="ttdef"><b>Definition:</b> <a href="editor_8h_source.html#l00035">editor.h:35</a></div></div>
+<div class="ttc" id="pasabajos_8h_html"><div class="ttname"><a href="pasabajos_8h.html">pasabajos.h</a></div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdoc">STL namespace. </div></div>
+<div class="ttc" id="class_editor_html_a9ad63bfc2223205351c1faba4b5da938"><div class="ttname"><a href="class_editor.html#a9ad63bfc2223205351c1faba4b5da938">Editor::lut</a></div><div class="ttdeci">LUT lut</div><div class="ttdef"><b>Definition:</b> <a href="editor_8h_source.html#l00034">editor.h:34</a></div></div>
+<div class="ttc" id="class_editor_html_ade0f9b096220a452744c3dcd36e54011"><div class="ttname"><a href="class_editor.html#ade0f9b096220a452744c3dcd36e54011">Editor::punteroImagen</a></div><div class="ttdeci">Imagen * punteroImagen</div><div class="ttdef"><b>Definition:</b> <a href="editor_8h_source.html#l00036">editor.h:36</a></div></div>
+<div class="ttc" id="pixel_8h_html"><div class="ttname"><a href="pixel_8h.html">pixel.h</a></div></div>
+<div class="ttc" id="class_filtro_html"><div class="ttname"><a href="class_filtro.html">Filtro</a></div><div class="ttdoc">Clase abstracta que da herencia a las clases que aplicaran filtros a un objeto imagen. </div><div class="ttdef"><b>Definition:</b> <a href="filtro_8h_source.html#l00022">filtro.h:22</a></div></div>
+<div class="ttc" id="class_l_u_t_html"><div class="ttname"><a href="class_l_u_t.html">LUT</a></div><div class="ttdoc">Clase que carga y devuelve la tabla de valores de un archivo LUT. </div><div class="ttdef"><b>Definition:</b> <a href="lut_8h_source.html#l00024">lut.h:24</a></div></div>
+<div class="ttc" id="imagen_8h_html"><div class="ttname"><a href="imagen_8h.html">imagen.h</a></div></div>
+<div class="ttc" id="lut_8h_html"><div class="ttname"><a href="lut_8h.html">lut.h</a></div></div>
+<div class="ttc" id="filtro_8h_html"><div class="ttname"><a href="filtro_8h.html">filtro.h</a></div></div>
+<div class="ttc" id="class_editor_html"><div class="ttname"><a href="class_editor.html">Editor</a></div><div class="ttdoc">Clase que edita la información de los píxeles de un objeto imagen. </div><div class="ttdef"><b>Definition:</b> <a href="editor_8h_source.html#l00031">editor.h:31</a></div></div>
+<div class="ttc" id="mediana_8h_html"><div class="ttname"><a href="mediana_8h.html">mediana.h</a></div></div>
+<div class="ttc" id="class_imagen_html"><div class="ttname"><a href="class_imagen.html">Imagen</a></div><div class="ttdoc">Clase que contiene y gestiona los datos y valores de píxeles. </div><div class="ttdef"><b>Definition:</b> <a href="imagen_8h_source.html#l00023">imagen.h:23</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="editor_8h.html">editor.h</a></li>
+    <li class="footer">Generado el Miércoles, 15 de Febrero de 2023 18:09:10 para Proyecto de Exámen Final de Programación Avanzada - FIUNER por
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+debug/tst_ei_autotest.o
+debug/aic.o
+debug/analizador.o
+debug/archivo.o
+debug/editor.o
+debug/expositor.o
+debug/filtro.o
+debug/gestordearchivos.o
+debug/imagen.o
+debug/interfaz.o
+debug/lut.o
+debug/mediana.o
+debug/pasabajos.o
+debug/pixel.o
+debug/pnm.o

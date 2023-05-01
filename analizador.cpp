@@ -1,5 +1,6 @@
 #include "analizador.h"
 
+
 Analizador::Analizador()
 {
     funcionRojos.resize(256);
@@ -8,9 +9,9 @@ Analizador::Analizador()
     funcionIntensidades.resize(256);
 }
 
-void Analizador::setImagen(Imagen *nuevaImagen)
+void Analizador::setImagen(Imagen *newPunteroImagen)
 {
-    imagen = nuevaImagen;
+    punteroImagen = newPunteroImagen;
 }
 
 void Analizador::analizar()
@@ -18,17 +19,17 @@ void Analizador::analizar()
     Pixel pixel;
     int sumatoria=0, sumatoriaR=0, sumatoriaG=0, sumatoriaB=0;
 
-    if(imagen->getId()=="P3" || imagen->getId()=="P6")
+    if(punteroImagen->getId()=="P3" || punteroImagen->getId()=="P6")
     {
         rojos.clear();
         verdes.clear();
         azules.clear();
 
-        for(int f=0; f<imagen->getFilas(); f++)
+        for(int f=0; f<punteroImagen->getFilas(); f++)
         {
-            for(int c=0; c<imagen->getColumnas(); c++)
+            for(int c=0; c<punteroImagen->getColumnas(); c++)
             {
-                pixel=imagen->getPixel(f,c);
+                pixel=punteroImagen->getPixel(f,c);
 
                 rojos.push_back(pixel.getR());
                 verdes.push_back(pixel.getG());
@@ -39,9 +40,9 @@ void Analizador::analizar()
                 sumatoriaB+=pixel.getB();
             }
         }
-        promedioR=sumatoriaR/(rojos.size());
-        promedioG=sumatoriaG/(verdes.size());
-        promedioB=sumatoriaB/(azules.size());
+        promedioR=(float)sumatoriaR/((float)rojos.size());
+        promedioG=(float)sumatoriaG/((float)verdes.size());
+        promedioB=(float)sumatoriaB/((float)azules.size());
 
         int varianzaR=0, varianzaG=0, varianzaB=0;
 
@@ -52,9 +53,9 @@ void Analizador::analizar()
             varianzaB+=pow(azules[i]-promedioB, 2);
         }
 
-        desvio_estandarR=sqrt(varianzaR/rojos.size());
-        desvio_estandarG=sqrt(varianzaG/verdes.size());
-        desvio_estandarB=sqrt(varianzaB/azules.size());
+        desvioEstandarR=sqrt(varianzaR/rojos.size());
+        desvioEstandarG=sqrt(varianzaG/verdes.size());
+        desvioEstandarB=sqrt(varianzaB/azules.size());
 
         sort(rojos.begin(), rojos.end());
         sort(verdes.begin(), verdes.end());
@@ -68,110 +69,96 @@ void Analizador::analizar()
         minimoB=azules[0];
         maximoB=azules[ultimo];
 
-        int repeticion_R=0, repeticion_G=0, repeticion_B=0, maxima_repeticion_R=0, maxima_repeticion_G=0, maxima_repeticion_B=0;
 
-        for(unsigned long long i=1; i<rojos.size()-1; i++)
+        for(unsigned long long i=1; i<rojos.size(); i++)
         {
             if(rojos[i]==rojos[i-1]){
-                repeticion_R++;
-                if(repeticion_R>maxima_repeticion_R)
+                cantidadDeAparicionesValorR++;
+                if(cantidadDeAparicionesValorR>maximaAparicionValorR)
                 {
-                    maxima_repeticion_R=repeticion_R;
+                    maximaAparicionValorR=cantidadDeAparicionesValorR;
                     modaR=rojos[i];
                 }
             }
             else
             {
-                repeticion_R=0;
+                cantidadDeAparicionesValorR=1;
             }
 
             if(verdes[i]==verdes[i-1])
             {
-                repeticion_G++;
-                if(repeticion_G>maxima_repeticion_G)
+                cantidadDeAparicionesValorG++;
+                if(cantidadDeAparicionesValorG>maximaAparicionValorG)
                 {
-                    maxima_repeticion_G=repeticion_G;
+                    maximaAparicionValorG=cantidadDeAparicionesValorG;
                     modaG=verdes[i];
                 }
             }
             else
             {
-                repeticion_G=0;
+                cantidadDeAparicionesValorG=1;
             }
 
             if(azules[i]==azules[i-1]){
-                repeticion_B++;
-                if(repeticion_B>maxima_repeticion_B)
+                cantidadDeAparicionesValorB++;
+                if(cantidadDeAparicionesValorB>maximaAparicionValorB)
                 {
-                    maxima_repeticion_B=repeticion_B;
+                    maximaAparicionValorB=cantidadDeAparicionesValorB;
                     modaB=azules[i];
                 }
             }
             else
             {
-                repeticion_B=0;
+                cantidadDeAparicionesValorB=1;
             }
         }
-
-        cout<<"promedio R: "<<promedioR<<" promedio G: "<<promedioG<<" promedio B: "<<promedioB<<endl;
-        cout<<"desvio R: "<<desvio_estandarR<<" desvio G: "<<desvio_estandarG<<" desvio B: "<<desvio_estandarB<<endl;
-        cout<<"moda R: "<<modaR<<" moda G: "<<modaG<<" moda B: "<<modaB<<endl;
-        cout<<"maximo R: "<<maximoR<<" maximo G: "<<maximoG<<" maximo B: "<<maximoB<<endl;
-        cout<<"minimo R: "<<minimoR<<" minimo G: "<<minimoG<<" minimo B: "<<minimoB<<endl;
     }
 
     else
     {
         intensidad.clear();
-        for(int f=0; f<imagen->getFilas(); f++)
+        for(int f=0; f<punteroImagen->getFilas(); f++)
         {
-            for(int c=0; c<imagen->getColumnas(); c++)
+            for(int c=0; c<punteroImagen->getColumnas(); c++)
             {
-                pixel=imagen->getPixel(f,c);
+                pixel=punteroImagen->getPixel(f,c);
                 intensidad.push_back(pixel.getR());
                 sumatoria+=pixel.getR();
             }
         }
 
-        promedio=sumatoria/(intensidad.size());
+        promedioIntensidad=(float)sumatoria/((float)intensidad.size());
 
         int varianza=0;
         for(unsigned long long i=0; i<intensidad.size(); i++)
         {
-            varianza+=pow(intensidad[i]-promedio, 2);
+            varianza+=pow(intensidad[i]-promedioIntensidad, 2);
         }
 
-        desvio_estandar=sqrt(varianza/intensidad.size());
+        desvioEstandarIntensidad=sqrt(varianza/intensidad.size());
 
         sort(intensidad.begin(), intensidad.end());
 
         unsigned long long ultimo = intensidad.size()-1;
-        minimo=intensidad[0];
-        maximo=intensidad[ultimo];
+        minimoIntensidad=intensidad[0];
+        maximoIntensidad=intensidad[ultimo];
 
-        int repeticion=0, maxima_repeticion=0;
-
-        for(unsigned long long i=1; i<intensidad.size()-1; i++)
+        for(unsigned long long i=1; i<intensidad.size(); i++)
         {
             if(intensidad[i]==intensidad[i-1])
             {
-                repeticion++;
-                if(repeticion>maxima_repeticion)
+                cantidadDeAparicionesIntensidad++;
+                if(cantidadDeAparicionesIntensidad>maximaAparicionDeIntensidad)
                 {
-                maxima_repeticion=repeticion;
-                moda=intensidad[i];
+                    maximaAparicionDeIntensidad=cantidadDeAparicionesIntensidad;
+                    modaIntensidad=intensidad[i];
                 }
             }
             else
             {
-                repeticion=0;
+                cantidadDeAparicionesIntensidad=1;
             }
         }
-        cout<<"promedio: "<<promedio<<endl;
-        cout<<"desvio: "<<desvio_estandar<<endl;
-        cout<<"moda: "<<moda<<endl;
-        cout<<"maximo: "<<maximo<<endl;
-        cout<<"minimo: "<<minimo<<endl;
     }
 }
 
@@ -180,12 +167,12 @@ void Analizador::generarDatosDeHistograma()
     Pixel pixel;
     int R, G, B, intensidad;
 
-    if(imagen->getId()=="P3" || imagen->getId()=="P6")
-        for(int f=0; f<imagen->getFilas(); f++)
+    if(punteroImagen->getId()=="P3" || punteroImagen->getId()=="P6")
+        for(int f=0; f<punteroImagen->getFilas(); f++)
         {
-            for(int c=0; c<imagen->getColumnas(); c++)
+            for(int c=0; c<punteroImagen->getColumnas(); c++)
             {
-                pixel = imagen->getPixel(f,c);
+                pixel = punteroImagen->getPixel(f,c);
                 R=pixel.getR();
                 funcionRojos[R]++;
                 G=pixel.getG();
@@ -196,11 +183,11 @@ void Analizador::generarDatosDeHistograma()
         }
     else
     {
-       for(int f=0; f<imagen->getFilas(); f++)
-       {
-            for(int c=0; c<imagen->getColumnas(); c++)
+        for(int f=0; f<punteroImagen->getFilas(); f++)
+        {
+            for(int c=0; c<punteroImagen->getColumnas(); c++)
             {
-                pixel = imagen->getPixel(f,c);
+                pixel = punteroImagen->getPixel(f,c);
                 intensidad = pixel.getR();
                 funcionIntensidades[intensidad]++;
             }
@@ -210,46 +197,50 @@ void Analizador::generarDatosDeHistograma()
 
 void Analizador::detectarRegion(int fila, int columna, int tolerancia)
 {
-    Pixel pixelReferencia = imagen->getPixel(fila, columna);
+    Pixel pixelReferencia = punteroImagen->getPixel(fila, columna);
     region.clear();
-    region.resize(imagen->getFilas());
-    for(int f=0; f<imagen->getFilas(); f++)
+    region.resize(punteroImagen->getFilas());
+    for(int f=0; f<punteroImagen->getFilas(); f++)
     {
-        region[f].resize(imagen->getColumnas());
+        region[f].resize(punteroImagen->getColumnas());
     }
     areaMapeada = 0;
-
+    profundidadRecursiva = 0;
     algoritmoDelPintor(fila, columna, pixelReferencia, tolerancia);
 }
 
 void Analizador::algoritmoDelPintor(int fila, int columna, Pixel referencia, int tolerancia)
 {
-    if(fila>=0 && fila<imagen->getFilas() && columna<imagen->getColumnas() && columna>=0)
-    {
-        Pixel pixel = imagen->getPixel(fila, columna);
-        int deltaR = sqrt(pow( (pixel.getR() - referencia.getR()) , 2));
-        int deltaG = sqrt(pow( (pixel.getG() - referencia.getG()) , 2));
-        int deltaB = sqrt(pow( (pixel.getB() - referencia.getB()) , 2));
-
-        if(deltaR<=tolerancia/2 && deltaG<=tolerancia/2 && deltaB<=tolerancia/2 && !region[fila][columna])
+    ++profundidadRecursiva;
+    if(profundidadRecursiva<3000){
+        if(fila>=0 && fila<punteroImagen->getFilas() && columna<punteroImagen->getColumnas() && columna>=0)
         {
-            region[fila][columna] = true;
-            areaMapeada++;
-            algoritmoDelPintor(fila+1, columna+1, referencia, tolerancia);
-            algoritmoDelPintor(fila+1, columna-1, referencia, tolerancia);
-            algoritmoDelPintor(fila+1, columna, referencia, tolerancia);
-            algoritmoDelPintor(fila-1, columna+1, referencia, tolerancia);
-            algoritmoDelPintor(fila-1, columna-1, referencia, tolerancia);
-            algoritmoDelPintor(fila-1, columna, referencia, tolerancia);
-            algoritmoDelPintor(fila, columna+1, referencia, tolerancia);
-            algoritmoDelPintor(fila, columna-1, referencia, tolerancia);
+            Pixel pixel = punteroImagen->getPixel(fila, columna);
+            int deltaR = sqrt(pow( (pixel.getR() - referencia.getR()) , 2));
+            int deltaG = sqrt(pow( (pixel.getG() - referencia.getG()) , 2));
+            int deltaB = sqrt(pow( (pixel.getB() - referencia.getB()) , 2));
+
+            if(deltaR<=tolerancia && deltaG<=tolerancia && deltaB<=tolerancia && !region[fila][columna])
+            {
+                region[fila][columna] = true;
+                areaMapeada++;
+                algoritmoDelPintor(fila+1, columna+1, referencia, tolerancia);
+                algoritmoDelPintor(fila+1, columna-1, referencia, tolerancia);
+                algoritmoDelPintor(fila+1, columna, referencia, tolerancia);
+                algoritmoDelPintor(fila-1, columna+1, referencia, tolerancia);
+                algoritmoDelPintor(fila-1, columna-1, referencia, tolerancia);
+                algoritmoDelPintor(fila-1, columna, referencia, tolerancia);
+                algoritmoDelPintor(fila, columna+1, referencia, tolerancia);
+                algoritmoDelPintor(fila, columna-1, referencia, tolerancia);
+            }
         }
     }
+    --profundidadRecursiva;
 }
 
-float Analizador::getPromedio() const
+float Analizador::getPromedioIntensidad() const
 {
-    return promedio;
+    return promedioIntensidad;
 }
 
 const vector<vector<bool> > &Analizador::getRegionDetectada() const
@@ -277,7 +268,7 @@ const vector<int> &Analizador::getFuncionIntensidades() const
     return funcionIntensidades;
 }
 
-float Analizador::getFrecuenciaModa() const
+int Analizador::getMayorFrecuenciaIntensidad() const
 {
     int frecuenciaModa=0;
 
@@ -286,7 +277,7 @@ float Analizador::getFrecuenciaModa() const
     return frecuenciaModa;
 }
 
-float Analizador::getMayorFrecuenciaModaRGB() const
+int Analizador::getMayorFrecuenciaRGB() const
 {
     int frecuenciaModaR=0, frecuenciaModaG=0, frecuenciaModaB=0;
 
@@ -300,6 +291,121 @@ float Analizador::getMayorFrecuenciaModaRGB() const
 int Analizador::getAreaMapeada() const
 {
     return areaMapeada;
+}
+
+int Analizador::getMaximaAparicionDeIntensidad() const
+{
+    return maximaAparicionDeIntensidad;
+}
+
+int Analizador::getModaIntensidad() const
+{
+    return modaIntensidad;
+}
+
+int Analizador::getMaximaAparicionValorR() const
+{
+    return maximaAparicionValorR;
+}
+
+int Analizador::getModaR() const
+{
+    return modaR;
+}
+
+float Analizador::getPromedioR() const
+{
+    return promedioR;
+}
+
+float Analizador::getPromedioG() const
+{
+    return promedioG;
+}
+
+float Analizador::getPromedioB() const
+{
+    return promedioB;
+}
+
+int Analizador::getModaG() const
+{
+    return modaG;
+}
+
+int Analizador::getModaB() const
+{
+    return modaB;
+}
+
+float Analizador::getDesvioEstandarIntensidad() const
+{
+    return desvioEstandarIntensidad;
+}
+
+float Analizador::getDesvioEstandarR() const
+{
+    return desvioEstandarR;
+}
+
+float Analizador::getDesvioEstandarG() const
+{
+    return desvioEstandarG;
+}
+
+float Analizador::getDesvioEstandarB() const
+{
+    return desvioEstandarB;
+}
+
+int Analizador::getMinimoIntensidad() const
+{
+    return minimoIntensidad;
+}
+
+int Analizador::getMaximoIntensidad() const
+{
+    return maximoIntensidad;
+}
+
+int Analizador::getMinimoR() const
+{
+    return minimoR;
+}
+
+int Analizador::getMaximoR() const
+{
+    return maximoR;
+}
+
+int Analizador::getMinimoG() const
+{
+    return minimoG;
+}
+
+int Analizador::getMaximoG() const
+{
+    return maximoG;
+}
+
+int Analizador::getMinimoB() const
+{
+    return minimoB;
+}
+
+int Analizador::getMaximoB() const
+{
+    return maximoB;
+}
+
+int Analizador::getMaximaAparicionValorG() const
+{
+    return maximaAparicionValorG;
+}
+
+int Analizador::getMaximaAparicionValorB() const
+{
+    return maximaAparicionValorB;
 }
 
 

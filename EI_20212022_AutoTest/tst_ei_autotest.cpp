@@ -3,6 +3,15 @@
 // add necessary includes here
 #include <vector>
 #include <string>
+#include <dirent.h>
+
+#include "../pnm.h"
+#include "../imagen.h"
+#include "../pixel.h"
+#include "../analizador.h"
+#include "../editor.h"
+
+
 
 typedef unsigned int uint;
 
@@ -162,7 +171,22 @@ vector<string> EI_AutoTest::listaDeArchivosDeImagen()
     vector<string> resultado;
 
     // Aquí el código de la prueba
+    DIR *directorio;
+    directorio = opendir(ruta.c_str());
+    if (directorio != NULL)
+    {
+        string pto("."), ptopto("..");
+        struct dirent *entrada;
 
+        while ((entrada = readdir(directorio)) != NULL)
+        {
+            if( entrada->d_name != pto and entrada->d_name != ptopto )
+            {
+                resultado.push_back(entrada->d_name);
+            }
+        }
+    }
+    closedir(directorio);
 
     return resultado;
 }
@@ -175,6 +199,11 @@ string EI_AutoTest::tipoDeArchivo01()
     */
 
     // Aquí el código de la prueba
+    PNM archivo;
+    Imagen imagen;
+    archivo.leer(&imagen , "../grupo_imagenes_1/test_01.pgm");
+    tipo = imagen.getId();
+
 
     return tipo;
 }
@@ -188,6 +217,10 @@ string EI_AutoTest::tipoDeArchivo02()
      *  "grupo_imagenes_1/entre_rios_03.ppm"
     */
     // Aquí el código de la prueba
+    PNM archivo;
+    Imagen imagen;
+    archivo.leer(&imagen , "../grupo_imagenes_1/entre_rios_03.ppm");
+    tipo = imagen.getId();
 
     return tipo;
 }
@@ -201,7 +234,13 @@ tuple<uint, uint> EI_AutoTest::getFilasYColumnas01()
     */
 
     // Aquí el código de la prueba
+    PNM archivo;
+    Imagen imagen;
+    Imagen *ptr_imagen = &imagen;
 
+    archivo.leer(ptr_imagen , "../grupo_imagenes_1/test_01.pgm");
+    filas = ptr_imagen->getFilas();
+    columnas = ptr_imagen->getColumnas();
 
     return make_tuple(filas, columnas);
 }
@@ -216,7 +255,12 @@ uint EI_AutoTest::getIntensidadNivelDeGris01()
      */
 
     // Aquí el código de la prueba
-
+    PNM archivo;
+    Imagen imagen;
+    Pixel pixel;
+    archivo.leer(&imagen , "../grupo_imagenes_1/test_01.pgm");
+    pixel = imagen.getPixel(1,3);
+    nivelDeGris = pixel.getR();
 
     return nivelDeGris;
 }
@@ -231,7 +275,12 @@ uint EI_AutoTest::getIntensidadNivelDeGris02()
      */
 
     // Aquí el código de la prueba
-
+    PNM archivo;
+    Imagen imagen;
+    Pixel pixel;
+    archivo.leer(&imagen , "../grupo_imagenes_1/test_01.pgm");
+    pixel = imagen.getPixel(1,2);
+    nivelDeGris = pixel.getR();
 
     return nivelDeGris;
 }
@@ -247,6 +296,14 @@ tuple<uint, uint, uint> EI_AutoTest::getIntensidadesRGB01()
      */
 
     // Aquí el código de la prueba
+    PNM archivo;
+    Imagen imagen;
+    Pixel pixel;
+    archivo.leer(&imagen , "../grupo_imagenes_1/test_02.ppm");
+    pixel = imagen.getPixel(1,3);
+    R = pixel.getR();
+    G = pixel.getG();
+    B = pixel.getB();
 
 
     return make_tuple(R, G, B);
@@ -263,7 +320,14 @@ tuple<uint, uint, uint> EI_AutoTest::getIntensidadesRGB02()
      */
 
     // Aquí el código de la prueba
-
+    PNM archivo;
+    Imagen imagen;
+    Pixel pixel;
+    archivo.leer(&imagen , "../grupo_imagenes_1/test_02.ppm");
+    pixel = imagen.getPixel(1,2);
+    R = pixel.getR();
+    G = pixel.getG();
+    B = pixel.getB();
 
     return make_tuple(R, G, B);
 }
@@ -279,7 +343,14 @@ tuple<uint, uint, uint> EI_AutoTest::getIntensidadesRGB03()
      */
 
     // Aquí el código de la prueba
-
+    PNM archivo;
+    Imagen imagen;
+    Pixel pixel;
+    archivo.leer(&imagen , "../grupo_imagenes_1/entre_rios_03.ppm");
+    pixel = imagen.getPixel(163, 401);
+    R = pixel.getR();
+    G = pixel.getG();
+    B = pixel.getB();
 
     return make_tuple(R, G, B);
 }
@@ -295,7 +366,15 @@ tuple<int, uint> EI_AutoTest::getPixelGrisMasFrecuenteYSuCantidad01()
      */
 
     // Aquí el código de la prueba
+    PNM archivo;
+    Imagen imagen;
+    Analizador analizador;
+    archivo.leer(&imagen , "../grupo_imagenes_1/tigre_01.pgm");
+    analizador.setImagen(&imagen);
+    analizador.analizar();
 
+    nivel = analizador.getModaIntensidad();
+    cantidad = analizador.getMaximaAparicionDeIntensidad();
 
     return make_tuple(nivel, cantidad);
 }
@@ -311,7 +390,15 @@ tuple<int, uint> EI_AutoTest::getPixelColorMasFrecuenteYSuCantidad01()
      */
 
     // Aquí el código de la prueba
+    PNM archivo;
+    Imagen imagen;
+    Analizador analizador;
+    archivo.leer(&imagen , "../grupo_imagenes_2/predio_fi_uner_01.ppm");
+    analizador.setImagen(&imagen);
+    analizador.analizar();
 
+    nivelRojo = analizador.getModaR();
+    cantidad = analizador.getMaximaAparicionValorR();
 
     return make_tuple(nivelRojo, cantidad);
 }
@@ -331,6 +418,29 @@ tuple<uint, uint, uint, uint> EI_AutoTest::getIntensidadMediaYLocalLuegoDeSuaviz
      */
 
     // Aquí el código de la prueba
+    PNM archivo;
+    Imagen imagen;
+    Pixel pixel;
+    Analizador analizador;
+    Editor editor;
+
+    archivo.leer(&imagen , "../grupo_imagenes_1/hospital-robot_01.pgm");
+
+    pixel = imagen.getPixel(50,60);
+    intensidad_local_inicial = pixel.getR();
+
+    analizador.setImagen(&imagen);
+    analizador.analizar();
+    intensidad_media_inicial = analizador.getPromedioIntensidad();
+
+    editor.setImagen(&imagen);
+    editor.aplicarPasaBajos();
+
+    pixel = imagen.getPixel(50,60);
+    intensidad_local_final = pixel.getR();
+
+    analizador.analizar();
+    intensidad_media_final = analizador.getPromedioIntensidad();
 
     return make_tuple(intensidad_media_inicial, intensidad_media_final, intensidad_local_inicial, intensidad_local_final);
 }

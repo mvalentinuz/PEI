@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto de Exámen Final de Programación Avanzada - FIUNER: Fichero Fuente pixel.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Proyecto de Exámen Final de Programación Avanzada - FIUNER
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.14 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('pixel_8cpp_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">pixel.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="pixel_8cpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pixel_8h.html">pixel.h</a>&quot;</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div><div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="class_pixel.html#a9e7df91a9a33e501d880a03878a031a6">    3</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="class_pixel.html#a9e7df91a9a33e501d880a03878a031a6">Pixel::getR</a>()<span class="keyword"> const</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword"></span>{</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_pixel.html#ac3207a91ef79ca842f2170f6f13e571f">R</a>;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;}</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div><div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_pixel.html#ab10ee2b75be4780c930a14fe9bd43e55">    8</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_pixel.html#ab10ee2b75be4780c930a14fe9bd43e55">Pixel::setR</a>(<span class="keywordtype">int</span> newR)</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="class_pixel.html#ac3207a91ef79ca842f2170f6f13e571f">R</a> = newR;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_pixel.html#a73928242bfb8088afd8732e8122f2e23">   13</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="class_pixel.html#a73928242bfb8088afd8732e8122f2e23">Pixel::getG</a>()<span class="keyword"> const</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword"></span>{</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_pixel.html#a5c34e056ffaa8211036e8a2f9f34472a">G</a>;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_pixel.html#a8d11ea5ee4b171f3ffd5c8504129811a">   18</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_pixel.html#a8d11ea5ee4b171f3ffd5c8504129811a">Pixel::setG</a>(<span class="keywordtype">int</span> newG)</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_pixel.html#a5c34e056ffaa8211036e8a2f9f34472a">G</a> = newG;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div><div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_pixel.html#a22013176e9e9b77d0eba81d75740c35a">   23</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="class_pixel.html#a22013176e9e9b77d0eba81d75740c35a">Pixel::getB</a>()<span class="keyword"> const</span></div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword"></span>{</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_pixel.html#ab1b43eafa75726d1b43873360564c68f">B</a>;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_pixel.html#a86882ae470d1a5d00d2c7c18ce83ad1e">   28</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_pixel.html#a86882ae470d1a5d00d2c7c18ce83ad1e">Pixel::setB</a>(<span class="keywordtype">int</span> newB)</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_pixel.html#ab1b43eafa75726d1b43873360564c68f">B</a> = newB;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div><div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_pixel.html#a27ad99a2f705e635c42d242d530d4756">   33</a></span>&#160;<a class="code" href="class_pixel.html#a27ad99a2f705e635c42d242d530d4756">Pixel::Pixel</a>()</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div><div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_pixel.html#a30f6aaf9a1d8792245070860546fa365">   38</a></span>&#160;<a class="code" href="class_pixel.html#a30f6aaf9a1d8792245070860546fa365">Pixel::~Pixel</a>()</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div><div class="ttc" id="class_pixel_html_a9e7df91a9a33e501d880a03878a031a6"><div class="ttname"><a href="class_pixel.html#a9e7df91a9a33e501d880a03878a031a6">Pixel::getR</a></div><div class="ttdeci">int getR() const</div><div class="ttdoc">getR Getter de la variable R. </div><div class="ttdef"><b>Definition:</b> <a href="pixel_8cpp_source.html#l00003">pixel.cpp:3</a></div></div>
+<div class="ttc" id="class_pixel_html_a73928242bfb8088afd8732e8122f2e23"><div class="ttname"><a href="class_pixel.html#a73928242bfb8088afd8732e8122f2e23">Pixel::getG</a></div><div class="ttdeci">int getG() const</div><div class="ttdoc">getG Getter de la variable G. </div><div class="ttdef"><b>Definition:</b> <a href="pixel_8cpp_source.html#l00013">pixel.cpp:13</a></div></div>
+<div class="ttc" id="class_pixel_html_a86882ae470d1a5d00d2c7c18ce83ad1e"><div class="ttname"><a href="class_pixel.html#a86882ae470d1a5d00d2c7c18ce83ad1e">Pixel::setB</a></div><div class="ttdeci">void setB(int newB)</div><div class="ttdoc">setB Este método permite establecer el valor B. </div><div class="ttdef"><b>Definition:</b> <a href="pixel_8cpp_source.html#l00028">pixel.cpp:28</a></div></div>
+<div class="ttc" id="class_pixel_html_ac3207a91ef79ca842f2170f6f13e571f"><div class="ttname"><a href="class_pixel.html#ac3207a91ef79ca842f2170f6f13e571f">Pixel::R</a></div><div class="ttdeci">int R</div><div class="ttdef"><b>Definition:</b> <a href="pixel_8h_source.html#l00022">pixel.h:22</a></div></div>
+<div class="ttc" id="pixel_8h_html"><div class="ttname"><a href="pixel_8h.html">pixel.h</a></div></div>
+<div class="ttc" id="class_pixel_html_a8d11ea5ee4b171f3ffd5c8504129811a"><div class="ttname"><a href="class_pixel.html#a8d11ea5ee4b171f3ffd5c8504129811a">Pixel::setG</a></div><div class="ttdeci">void setG(int newG)</div><div class="ttdoc">setG Este método permite establecer el valor G. </div><div class="ttdef"><b>Definition:</b> <a href="pixel_8cpp_source.html#l00018">pixel.cpp:18</a></div></div>
+<div class="ttc" id="class_pixel_html_a5c34e056ffaa8211036e8a2f9f34472a"><div class="ttname"><a href="class_pixel.html#a5c34e056ffaa8211036e8a2f9f34472a">Pixel::G</a></div><div class="ttdeci">int G</div><div class="ttdef"><b>Definition:</b> <a href="pixel_8h_source.html#l00023">pixel.h:23</a></div></div>
+<div class="ttc" id="class_pixel_html_ab10ee2b75be4780c930a14fe9bd43e55"><div class="ttname"><a href="class_pixel.html#ab10ee2b75be4780c930a14fe9bd43e55">Pixel::setR</a></div><div class="ttdeci">void setR(int newR)</div><div class="ttdoc">setR Este método permite establecer el valor R. </div><div class="ttdef"><b>Definition:</b> <a href="pixel_8cpp_source.html#l00008">pixel.cpp:8</a></div></div>
+<div class="ttc" id="class_pixel_html_a22013176e9e9b77d0eba81d75740c35a"><div class="ttname"><a href="class_pixel.html#a22013176e9e9b77d0eba81d75740c35a">Pixel::getB</a></div><div class="ttdeci">int getB() const</div><div class="ttdoc">getB Getter de la variable B. </div><div class="ttdef"><b>Definition:</b> <a href="pixel_8cpp_source.html#l00023">pixel.cpp:23</a></div></div>
+<div class="ttc" id="class_pixel_html_a30f6aaf9a1d8792245070860546fa365"><div class="ttname"><a href="class_pixel.html#a30f6aaf9a1d8792245070860546fa365">Pixel::~Pixel</a></div><div class="ttdeci">~Pixel()</div><div class="ttdef"><b>Definition:</b> <a href="pixel_8cpp_source.html#l00038">pixel.cpp:38</a></div></div>
+<div class="ttc" id="class_pixel_html_a27ad99a2f705e635c42d242d530d4756"><div class="ttname"><a href="class_pixel.html#a27ad99a2f705e635c42d242d530d4756">Pixel::Pixel</a></div><div class="ttdeci">Pixel()</div><div class="ttdef"><b>Definition:</b> <a href="pixel_8cpp_source.html#l00033">pixel.cpp:33</a></div></div>
+<div class="ttc" id="class_pixel_html_ab1b43eafa75726d1b43873360564c68f"><div class="ttname"><a href="class_pixel.html#ab1b43eafa75726d1b43873360564c68f">Pixel::B</a></div><div class="ttdeci">int B</div><div class="ttdef"><b>Definition:</b> <a href="pixel_8h_source.html#l00024">pixel.h:24</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="pixel_8cpp.html">pixel.cpp</a></li>
+    <li class="footer">Generado el Miércoles, 15 de Febrero de 2023 18:09:10 para Proyecto de Exámen Final de Programación Avanzada - FIUNER por
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
+  </ul>
+</div>
+</body>
+</html>

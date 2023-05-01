@@ -16,7 +16,7 @@ void LUT::cargarLUT(string ruta)
     archivo.open(ruta.c_str());
     if(!archivo.is_open())
     {
-        cout<<"Hubo un error abriendo el archivo LUT"<<endl;
+        cout<<"Hubo un error abriendo el archivo LUT."<<endl;
     }
 
     archivo.ignore(100, '\n');

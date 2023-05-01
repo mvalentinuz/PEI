@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto de Exámen Final de Programación Avanzada - FIUNER: Fichero Fuente interfaz.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Proyecto de Exámen Final de Programación Avanzada - FIUNER
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.14 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('interfaz_8h_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">interfaz.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="interfaz_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifndef INTERFAZ_H</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define INTERFAZ_H</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="gestordearchivos_8h.html">gestordearchivos.h</a>&quot;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="expositor_8h.html">expositor.h</a>&quot;</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;QApplication&gt;</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div><div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_interfaz.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_interfaz.html">Interfaz</a></div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">private</span>:</div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_interfaz.html#a812507c7b305a31bd11644cadff6e0ca">   26</a></span>&#160;    <a class="code" href="class_gestor_de_archivos.html">GestorDeArchivos</a> <a class="code" href="class_interfaz.html#a812507c7b305a31bd11644cadff6e0ca">gestor</a>; </div><div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_interfaz.html#af220451714708ba17aac984d2f4675d9">   27</a></span>&#160;    <a class="code" href="class_expositor.html">Expositor</a> <a class="code" href="class_interfaz.html#af220451714708ba17aac984d2f4675d9">expositor</a>; </div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_interfaz.html#ad05907af22b04bb3d69b7412d12903d2">   28</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_interfaz.html#ad05907af22b04bb3d69b7412d12903d2">rutaDIR</a> = <span class="stringliteral">&quot;../PEI&quot;</span>; </div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_interfaz.html#aa467567d0c6684136a29495d4d9da2ea">   29</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_interfaz.html#aa467567d0c6684136a29495d4d9da2ea">carpeta1</a> = <span class="stringliteral">&quot;grupo_imagenes_1&quot;</span>; </div><div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_interfaz.html#ad1f6219703ca1c90414023560eb7ca6d">   30</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_interfaz.html#ad1f6219703ca1c90414023560eb7ca6d">carpeta2</a> = <span class="stringliteral">&quot;grupo_imagenes_2&quot;</span>; </div><div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_interfaz.html#a09f2c0ebdeb80668b7270f2fbf70384c">   31</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_interfaz.html#a09f2c0ebdeb80668b7270f2fbf70384c">carpeta3</a> = <span class="stringliteral">&quot;grupo_imagenes_3_corruptas&quot;</span>; </div><div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_interfaz.html#a643b0a2b2dad771614d79aec4fc38800">   32</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_interfaz.html#a643b0a2b2dad771614d79aec4fc38800">carpetaDeEdiciones</a> = <span class="stringliteral">&quot;grupo_imagenes_4_nuevas&quot;</span>; </div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_interfaz.html#a0f6a43c3b126a113bf0b01a6ae8051bc">Interfaz</a>();</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_interfaz.html#ac8c9a4471ee331b4aef2209c8c0f8c09">mostrarInterfaz</a>(QApplication *QApp);</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_interfaz.html#a5d895425ea4ae89f25fb78c4679f1d9e">elegirCarpetaDelGestor</a>();</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_interfaz.html#ae3bf4222b18efc760f82335b0358c095">indicarAtajos</a>();</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_interfaz.html#ab94218d7c78e56b82424c0825dcd50c6">~Interfaz</a>();</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif // INTERFAZ_H</span></div><div class="ttc" id="class_expositor_html"><div class="ttname"><a href="class_expositor.html">Expositor</a></div><div class="ttdoc">Clase que grafica la imagen en una ventana como también su histograma. </div><div class="ttdef"><b>Definition:</b> <a href="expositor_8h_source.html#l00030">expositor.h:30</a></div></div>
+<div class="ttc" id="class_interfaz_html_af220451714708ba17aac984d2f4675d9"><div class="ttname"><a href="class_interfaz.html#af220451714708ba17aac984d2f4675d9">Interfaz::expositor</a></div><div class="ttdeci">Expositor expositor</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8h_source.html#l00027">interfaz.h:27</a></div></div>
+<div class="ttc" id="class_interfaz_html_ae3bf4222b18efc760f82335b0358c095"><div class="ttname"><a href="class_interfaz.html#ae3bf4222b18efc760f82335b0358c095">Interfaz::indicarAtajos</a></div><div class="ttdeci">void indicarAtajos()</div><div class="ttdoc">indicarAtajos Este método muestra por consola al usuario todos los atajos de funcionalidades del prog...</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8cpp_source.html#l00073">interfaz.cpp:73</a></div></div>
+<div class="ttc" id="class_interfaz_html_a09f2c0ebdeb80668b7270f2fbf70384c"><div class="ttname"><a href="class_interfaz.html#a09f2c0ebdeb80668b7270f2fbf70384c">Interfaz::carpeta3</a></div><div class="ttdeci">string carpeta3</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8h_source.html#l00031">interfaz.h:31</a></div></div>
+<div class="ttc" id="class_interfaz_html_a643b0a2b2dad771614d79aec4fc38800"><div class="ttname"><a href="class_interfaz.html#a643b0a2b2dad771614d79aec4fc38800">Interfaz::carpetaDeEdiciones</a></div><div class="ttdeci">string carpetaDeEdiciones</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8h_source.html#l00032">interfaz.h:32</a></div></div>
+<div class="ttc" id="expositor_8h_html"><div class="ttname"><a href="expositor_8h.html">expositor.h</a></div></div>
+<div class="ttc" id="gestordearchivos_8h_html"><div class="ttname"><a href="gestordearchivos_8h.html">gestordearchivos.h</a></div></div>
+<div class="ttc" id="class_interfaz_html_ab94218d7c78e56b82424c0825dcd50c6"><div class="ttname"><a href="class_interfaz.html#ab94218d7c78e56b82424c0825dcd50c6">Interfaz::~Interfaz</a></div><div class="ttdeci">~Interfaz()</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8cpp_source.html#l00103">interfaz.cpp:103</a></div></div>
+<div class="ttc" id="class_interfaz_html_ac8c9a4471ee331b4aef2209c8c0f8c09"><div class="ttname"><a href="class_interfaz.html#ac8c9a4471ee331b4aef2209c8c0f8c09">Interfaz::mostrarInterfaz</a></div><div class="ttdeci">void mostrarInterfaz(QApplication *QApp)</div><div class="ttdoc">mostrarInterfaz Este método permite dar indicaciones al usuario por consola e inicializar las funcion...</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8cpp_source.html#l00008">interfaz.cpp:8</a></div></div>
+<div class="ttc" id="class_interfaz_html"><div class="ttname"><a href="class_interfaz.html">Interfaz</a></div><div class="ttdoc">Clase que se comunica con el usuario indicando funciones de uso. Coordina las operaciones de los obje...</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8h_source.html#l00023">interfaz.h:23</a></div></div>
+<div class="ttc" id="class_interfaz_html_ad1f6219703ca1c90414023560eb7ca6d"><div class="ttname"><a href="class_interfaz.html#ad1f6219703ca1c90414023560eb7ca6d">Interfaz::carpeta2</a></div><div class="ttdeci">string carpeta2</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8h_source.html#l00030">interfaz.h:30</a></div></div>
+<div class="ttc" id="class_gestor_de_archivos_html"><div class="ttname"><a href="class_gestor_de_archivos.html">GestorDeArchivos</a></div><div class="ttdoc">Clase que permite acceder a un directorio de archivos y a sus archivos en cuestión. </div><div class="ttdef"><b>Definition:</b> <a href="gestordearchivos_8h_source.html#l00028">gestordearchivos.h:28</a></div></div>
+<div class="ttc" id="class_interfaz_html_a0f6a43c3b126a113bf0b01a6ae8051bc"><div class="ttname"><a href="class_interfaz.html#a0f6a43c3b126a113bf0b01a6ae8051bc">Interfaz::Interfaz</a></div><div class="ttdeci">Interfaz()</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8cpp_source.html#l00003">interfaz.cpp:3</a></div></div>
+<div class="ttc" id="class_interfaz_html_aa467567d0c6684136a29495d4d9da2ea"><div class="ttname"><a href="class_interfaz.html#aa467567d0c6684136a29495d4d9da2ea">Interfaz::carpeta1</a></div><div class="ttdeci">string carpeta1</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8h_source.html#l00029">interfaz.h:29</a></div></div>
+<div class="ttc" id="class_interfaz_html_ad05907af22b04bb3d69b7412d12903d2"><div class="ttname"><a href="class_interfaz.html#ad05907af22b04bb3d69b7412d12903d2">Interfaz::rutaDIR</a></div><div class="ttdeci">string rutaDIR</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8h_source.html#l00028">interfaz.h:28</a></div></div>
+<div class="ttc" id="class_interfaz_html_a812507c7b305a31bd11644cadff6e0ca"><div class="ttname"><a href="class_interfaz.html#a812507c7b305a31bd11644cadff6e0ca">Interfaz::gestor</a></div><div class="ttdeci">GestorDeArchivos gestor</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8h_source.html#l00026">interfaz.h:26</a></div></div>
+<div class="ttc" id="class_interfaz_html_a5d895425ea4ae89f25fb78c4679f1d9e"><div class="ttname"><a href="class_interfaz.html#a5d895425ea4ae89f25fb78c4679f1d9e">Interfaz::elegirCarpetaDelGestor</a></div><div class="ttdeci">void elegirCarpetaDelGestor()</div><div class="ttdoc">elegirCarpetaDelGestor Este método permite dar indicaciones al usuario por consola para seleccionar l...</div><div class="ttdef"><b>Definition:</b> <a href="interfaz_8cpp_source.html#l00050">interfaz.cpp:50</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="interfaz_8h.html">interfaz.h</a></li>
+    <li class="footer">Generado el Miércoles, 15 de Febrero de 2023 18:09:10 para Proyecto de Exámen Final de Programación Avanzada - FIUNER por
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
+  </ul>
+</div>
+</body>
+</html>

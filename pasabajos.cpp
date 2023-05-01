@@ -5,47 +5,48 @@ PasaBajos::PasaBajos()
 
 }
 
-void PasaBajos::filtrar(Imagen *imagen)
+void PasaBajos::filtrar(Imagen *punteroImagen)
 {
-    float constante = 1/9;
+    float constante = 0.11;
     int R, G, B;
     Pixel pixel;
 
-    for(int f=1; f<imagen->getFilas()-1; f++)
+    for(int f=1; f<punteroImagen->getFilas()-1; f++)
     {
-        for(int c=1; c<imagen->getColumnas()-1; c++)
+        for(int c=1; c<punteroImagen->getColumnas()-1; c++)
         {
-            R = constante*(imagen->getPixel(f,c).getR()
-                +imagen->getPixel(f+1,c+1).getR()
-                +imagen->getPixel(f+1,c).getR()
-                +imagen->getPixel(f,c+1).getR()
-                +imagen->getPixel(f-1,c).getR()
-                +imagen->getPixel(f,c-1).getR()
-                +imagen->getPixel(f-1,c-1).getR()
-                +imagen->getPixel(f-1,c+1).getR()
-                +imagen->getPixel(f+1,c-1).getR());
+            R = constante*(punteroImagen->getPixel(f,c).getR()
+                           +punteroImagen->getPixel(f+1,c+1).getR()
+                           +punteroImagen->getPixel(f+1,c).getR()
+                           +punteroImagen->getPixel(f,c+1).getR()
+                           +punteroImagen->getPixel(f-1,c).getR()
+                           +punteroImagen->getPixel(f,c-1).getR()
+                           +punteroImagen->getPixel(f-1,c-1).getR()
+                           +punteroImagen->getPixel(f-1,c+1).getR()
+                           +punteroImagen->getPixel(f+1,c-1).getR());
 
-            G = constante*(imagen->getPixel(f,c).getG()
-                +imagen->getPixel(f+1,c+1).getG()
-                +imagen->getPixel(f+1,c).getG()
-                +imagen->getPixel(f,c+1).getG()
-                +imagen->getPixel(f-1,c).getG()
-                +imagen->getPixel(f,c-1).getG()
-                +imagen->getPixel(f-1,c-1).getG()
-                +imagen->getPixel(f-1,c+1).getG()
-                +imagen->getPixel(f+1,c-1).getG());
+            G = constante*(punteroImagen->getPixel(f,c).getG()
+                           +punteroImagen->getPixel(f+1,c+1).getG()
+                           +punteroImagen->getPixel(f+1,c).getG()
+                           +punteroImagen->getPixel(f,c+1).getG()
+                           +punteroImagen->getPixel(f-1,c).getG()
+                           +punteroImagen->getPixel(f,c-1).getG()
+                           +punteroImagen->getPixel(f-1,c-1).getG()
+                           +punteroImagen->getPixel(f-1,c+1).getG()
+                           +punteroImagen->getPixel(f+1,c-1).getG());
 
-            B = constante*(imagen->getPixel(f,c).getB()
-                +imagen->getPixel(f+1,c+1).getB()
-                +imagen->getPixel(f+1,c).getB()
-                +imagen->getPixel(f,c+1).getB()
-                +imagen->getPixel(f-1,c).getB()
-                +imagen->getPixel(f,c-1).getB()
-                +imagen->getPixel(f-1,c-1).getB()
-                +imagen->getPixel(f-1,c+1).getB()
-                +imagen->getPixel(f+1,c-1).getB());
+            B = constante*(punteroImagen->getPixel(f,c).getB()
+                           +punteroImagen->getPixel(f+1,c+1).getB()
+                           +punteroImagen->getPixel(f+1,c).getB()
+                           +punteroImagen->getPixel(f,c+1).getB()
+                           +punteroImagen->getPixel(f-1,c).getB()
+                           +punteroImagen->getPixel(f,c-1).getB()
+                           +punteroImagen->getPixel(f-1,c-1).getB()
+                           +punteroImagen->getPixel(f-1,c+1).getB()
+                           +punteroImagen->getPixel(f+1,c-1).getB());
 
-           imagen->modificaPixeldeMatriz(f, c, R, G, B);
+            punteroImagen->modificaPixeldeMatriz(f, c, R, G, B);
+
         }
     }
 }

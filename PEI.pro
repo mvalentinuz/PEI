@@ -19,6 +19,7 @@ SOURCES += \
         filtro.cpp \
         gestordearchivos.cpp \
         imagen.cpp \
+        interfaz.cpp \
         lut.cpp \
         main.cpp \
         mediana.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     filtro.h \
     gestordearchivos.h \
     imagen.h \
+    interfaz.h \
     lut.h \
     mediana.h \
     pasabajos.h \

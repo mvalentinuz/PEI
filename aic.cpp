@@ -5,12 +5,13 @@ AIC::AIC()
 
 }
 
-void AIC::leer(Imagen *imagen, string ruta)
+void AIC::leer(Imagen *punteroImagen, string ruta)
 {
     archivo.open(ruta, ios::binary | ios::out);
     if(!archivo.is_open())
     {
-        cout<<"El archivo no se abrio correctamente"<<endl;
+        cout<<"El archivo AIC no se abrio correctamente."<<endl;
+        exit(0);
     }
     else
     {
@@ -18,26 +19,26 @@ void AIC::leer(Imagen *imagen, string ruta)
         archivo.seekg(0, ios::beg);
 
         getline(archivo, linea);
-        imagen->setId(linea);
+        punteroImagen->setId(linea);
 
         getline(archivo, linea);
-        imagen->setMetadatos(linea);
+        punteroImagen->setMetadatos(linea);
 
         getline(archivo, linea, ' ');
-        imagen->setColumnas(stoi(linea));
+        punteroImagen->setColumnas(stoi(linea));
 
         getline(archivo, linea);
-        imagen->setFilas(stoi(linea));
+        punteroImagen->setFilas(stoi(linea));
 
-        imagen->redimensionarMatriz();
+        punteroImagen->redimensionarMatriz();
 
         getline(archivo, linea);
-        imagen->setValorMaximo(stoi(linea));
+        punteroImagen->setValorMaximo(stoi(linea));
 
 
         int monocromo = 0, repeticiones = 0, filas = 0, columnas = 0;
 
-        if(imagen->getId()=="P2C")
+        if(punteroImagen->getId()=="P2C")
         {
             while(!archivo.eof())
             {
@@ -45,7 +46,7 @@ void AIC::leer(Imagen *imagen, string ruta)
                 archivo>>repeticiones;
                 for(int i = 0; i<repeticiones; i++)
                 {
-                    imagen->modificaPixeldeMatriz(filas,columnas,monocromo,monocromo,monocromo);
+                    punteroImagen->modificaPixeldeMatriz(filas,columnas,monocromo,monocromo,monocromo);
                     filas++;
                     columnas++;
                 }
@@ -53,44 +54,44 @@ void AIC::leer(Imagen *imagen, string ruta)
         }
         else
         {
-            cout<<"Error de lectura: El ID no es valido."<<endl;
+            cout<<"Error de lectura AIC: El ID no es valido."<<endl;
         }
     }
     archivo.close();
 }
 
-void AIC::guardar(Imagen *imagen, string ruta, string ID)
+void AIC::guardar(Imagen *punteroImagen, string ruta, string ID)
 {
     archivo.open(ruta, ios::binary | ios::out);
     if(!archivo.is_open())
     {
-        cout<<"El archivo no se abrio correctamente"<<endl;
+        cout<<"El archivo AIC no se abrio correctamente"<<endl;
     }
     else
     {
         archivo.seekg(0, ios::beg);
 
         archivo<<"P2C"<<endl;
-        archivo<<imagen->getMetadatos()<<endl;
-        archivo<<imagen->getColumnas()<<" "<<imagen->getFilas()<<endl;
-        archivo<<imagen->getValorMaximo()<<endl;
+        archivo<<punteroImagen->getMetadatos()<<endl;
+        archivo<<punteroImagen->getColumnas()<<" "<<punteroImagen->getFilas()<<endl;
+        archivo<<punteroImagen->getValorMaximo()<<endl;
 
         int aparicionesEnSerie = 1;
         Pixel pixel, pixelAnterior;
 
-        for(int f=1; f<imagen->getFilas(); f++)
+        for(int f=1; f<punteroImagen->getFilas(); f++)
         {
-            for(int c=1; c<imagen->getColumnas(); c++)
+            for(int c=1; c<punteroImagen->getColumnas(); c++)
             {
-                pixelAnterior = imagen->getPixel(f-1,c-1);
-                pixel = imagen->getPixel(f,c);
+                pixelAnterior = punteroImagen->getPixel(f-1,c-1);
+                pixel = punteroImagen->getPixel(f,c);
                 if(pixelAnterior.getR()==pixel.getR())
                 {
                     aparicionesEnSerie++;
                 }
                 else
                 {
-                    archivo<<pixelAnterior.getR()<<aparicionesEnSerie;
+                    archivo<<pixelAnterior.getR()<<" "<<aparicionesEnSerie<<" ";
                     aparicionesEnSerie = 1;
                 }
             }

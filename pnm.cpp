@@ -5,89 +5,102 @@ PNM::PNM()
 
 }
 
-void PNM::leer(Imagen *imagen, string ruta)
+void PNM::leer(Imagen *punteroImagen, string ruta)
 {
     archivo.open(ruta, ios::binary | ios::in);
     if(!archivo.is_open())
     {
-        cout<<"El archivo no se abrio correctamente"<<endl;
+        cout<<"El archivo PNM no se abrio correctamente."<<endl;
+        exit(0);
     }
     else
     {
-    string linea;
+        string linea;
         archivo.seekg(0, ios::beg);
 
         getline(archivo, linea);
-        imagen->setId(linea);
+        punteroImagen->setId(linea);
 
         getline(archivo, linea);
-        imagen->setMetadatos(linea);
+        punteroImagen->setMetadatos(linea);
 
         getline(archivo, linea, ' ');
-        imagen->setColumnas(stoi(linea));
+        punteroImagen->setColumnas(stoi(linea));
 
         getline(archivo, linea);
-        imagen->setFilas(stoi(linea));
+        punteroImagen->setFilas(stoi(linea));
 
-        imagen->redimensionarMatriz();
-        if(imagen->getId()!="P1" && imagen->getId()!="P4")
+        try
         {
-        getline(archivo, linea);
-        imagen->setValorMaximo(stoi(linea));
+            if(punteroImagen->getFilas()==0 || punteroImagen->getColumnas()==0)
+                throw true;
+        }
+
+        catch (bool corrupto)
+        {
+            cout<<"ERROR: El archivo PNM leido es corrupto."<<endl;
+            exit(0);
+        }
+
+        punteroImagen->redimensionarMatriz();
+        if(punteroImagen->getId()!="P1" && punteroImagen->getId()!="P4")
+        {
+            getline(archivo, linea);
+            punteroImagen->setValorMaximo(stoi(linea));
         }
 
         int R=0, G=0, B=0, monocromo=0;
 
-        if(imagen->getId()=="P1" || imagen->getId()=="P2")
+        if(punteroImagen->getId()=="P1" || punteroImagen->getId()=="P2")
         {
-            for(int f=0; f<imagen->getFilas(); f++)
+            for(int f=0; f<punteroImagen->getFilas(); f++)
             {
-                for(int c=0; c<imagen->getColumnas(); c++)
+                for(int c=0; c<punteroImagen->getColumnas(); c++)
                 {
                     archivo>>monocromo;
 
-                    imagen->modificaPixeldeMatriz(f,c,monocromo,monocromo,monocromo);
+                    punteroImagen->modificaPixeldeMatriz(f,c,monocromo,monocromo,monocromo);
                 }
             }
         }
 
-        if(imagen->getId()=="P3")
+        if(punteroImagen->getId()=="P3")
         {
-            for(int f=0; f<imagen->getFilas(); f++)
+            for(int f=0; f<punteroImagen->getFilas(); f++)
             {
-                for(int c=0; c<imagen->getColumnas(); c++)
+                for(int c=0; c<punteroImagen->getColumnas(); c++)
                 {
                     archivo>>R>>G>>B;
 
-                    imagen->modificaPixeldeMatriz(f,c,R,G,B);
+                    punteroImagen->modificaPixeldeMatriz(f,c,R,G,B);
                 }
             }
         }
 
-        if(imagen->getId()=="P4" || imagen->getId()=="P5")
+        if(punteroImagen->getId()=="P4" || punteroImagen->getId()=="P5")
         {
-            for(int f=0; f<imagen->getFilas(); f++)
+            for(int f=0; f<punteroImagen->getFilas(); f++)
             {
-                for(int c=0; c<imagen->getColumnas(); c++)
+                for(int c=0; c<punteroImagen->getColumnas(); c++)
                 {
                     archivo.read((char*)&monocromo, 1);
 
-                    imagen->modificaPixeldeMatriz(f,c,monocromo,monocromo,monocromo);
+                    punteroImagen->modificaPixeldeMatriz(f,c,monocromo,monocromo,monocromo);
                 }
             }
         }
 
-        if(imagen->getId()=="P6")
+        if(punteroImagen->getId()=="P6")
         {
-            for(int f=0; f<imagen->getFilas(); f++)
+            for(int f=0; f<punteroImagen->getFilas(); f++)
             {
-                for(int c=0; c<imagen->getColumnas(); c++)
+                for(int c=0; c<punteroImagen->getColumnas(); c++)
                 {
                     archivo.read((char*)&R, 1);
                     archivo.read((char*)&G, 1);
                     archivo.read((char*)&B, 1);
 
-                    imagen->modificaPixeldeMatriz(f,c,R,G,B);
+                    punteroImagen->modificaPixeldeMatriz(f,c,R,G,B);
                 }
             }
         }
@@ -95,93 +108,116 @@ void PNM::leer(Imagen *imagen, string ruta)
     archivo.close();
 }
 
-void PNM::guardar(Imagen *imagen, string ruta, string ID)
+void PNM::guardar(Imagen *punteroImagen, string ruta, string ID)
 {
-    archivo.open(ruta, ios::binary | ios::out);
-    if(!archivo.is_open())
-    {
-        cout<<"El archivo no se abrio correctamente"<<endl;
-    }
-    else
-    {
-        archivo.seekg(0, ios::beg);
-
-        archivo<<ID.c_str()<<endl;
-        archivo<<imagen->getMetadatos()<<endl;
-        archivo<<imagen->getColumnas()<<" "<<imagen->getFilas()<<endl;
-
-        if(imagen->getId()!="P1" && imagen->getId()!="P4")
+    if(ID=="P1"||ID=="P2"||ID=="P3"){
+        archivo.open(ruta, ios::out);
+        if(!archivo.is_open())
         {
-        archivo<<imagen->getValorMaximo()<<endl;
-        }
-
-        int R=0, G=0, B=0;
-        Pixel pixel;
-
-        if(ID=="P1" || ID=="P2")
-        {
-            for(int f=0; f<imagen->getFilas(); f++)
-            {
-                for(int c=0; c<imagen->getColumnas(); c++)
-                {
-                    pixel = imagen->getPixel(f,c);
-
-                    archivo<<pixel.getR();
-                }
-            }
-        }
-
-        if(ID=="P3")
-        {
-            for(int f=0; f<imagen->getFilas(); f++)
-            {
-                for(int c=0; c<imagen->getColumnas(); c++)
-                {
-                    pixel = imagen->getPixel(f,c);
-                    R = pixel.getR();
-                    G = pixel.getG();
-                    B = pixel.getB();
-
-                    archivo<<R<<G<<B;
-                }
-            }
-        }
-
-        if(ID=="P4" || ID=="P5")
-        {
-            for(int f=0; f<imagen->getFilas(); f++)
-            {
-                for(int c=0; c<imagen->getColumnas(); c++)
-                {
-                    pixel = imagen->getPixel(f,c);
-                    R = pixel.getR();
-                    archivo.write((char*)&R, 1);
-                }
-            }
-        }
-
-        if(ID=="P6")
-        {
-            for(int f=0; f<imagen->getFilas(); f++)
-            {
-                for(int c=0; c<imagen->getColumnas(); c++)
-                {
-                    pixel = imagen->getPixel(f,c);
-                    R = pixel.getR();
-                    G = pixel.getG();
-                    B = pixel.getB();
-                    archivo.write((char*)&R, 1);
-                    archivo.write((char*)&G, 1);
-                    archivo.write((char*)&B, 1);
-                }
-            }
+            cout<<"El archivo PNM no se abrio correctamente"<<endl;
         }
         else
         {
-            cout<<"Error de lectura: ID no valido"<<endl;
+            archivo.seekg(0, ios::beg);
+
+            archivo<<ID.c_str()<<endl;
+            archivo<<punteroImagen->getMetadatos()<<endl;
+            archivo<<punteroImagen->getColumnas()<<" "<<punteroImagen->getFilas()<<endl;
+
+            if(punteroImagen->getId()!="P1")
+            {
+                archivo<<punteroImagen->getValorMaximo()<<endl;
+            }
+
+            Pixel pixel;
+
+            if(ID=="P1" || ID=="P2")
+            {
+                for(int f=0; f<punteroImagen->getFilas(); f++)
+                {
+                    for(int c=0; c<punteroImagen->getColumnas(); c++)
+                    {
+                        pixel = punteroImagen->getPixel(f,c);
+                        archivo<<pixel.getR()<<" ";
+                    }
+                }
+            }
+
+            if(ID=="P3")
+            {
+                for(int f=0; f<punteroImagen->getFilas(); f++)
+                {
+                    for(int c=0; c<punteroImagen->getColumnas(); c++)
+                    {
+                        pixel = punteroImagen->getPixel(f,c);
+                        archivo<<pixel.getR()<<" ";
+                        archivo<<pixel.getG()<<" ";
+                        archivo<<pixel.getB()<<" ";
+                    }
+                }
+            }
         }
+        archivo.close();
     }
-    archivo.close();
+
+    if(ID=="P4"||ID=="P5"||ID=="P6"){
+        archivo.open(ruta, ios::binary | ios::out);
+        if(!archivo.is_open())
+        {
+            cout<<"El archivo PNM no se abrio correctamente"<<endl;
+        }
+        else
+        {
+            archivo.seekg(0, ios::beg);
+
+            archivo<<ID.c_str()<<endl;
+            archivo<<punteroImagen->getMetadatos()<<endl;
+            archivo<<punteroImagen->getColumnas()<<" "<<punteroImagen->getFilas()<<endl;
+
+            if(punteroImagen->getId()!="P4")
+            {
+                archivo<<punteroImagen->getValorMaximo()<<endl;
+            }
+
+            int R=0, G=0, B=0;
+            Pixel pixel;
+
+            if(ID=="P4" || ID=="P5")
+            {
+                for(int f=0; f<punteroImagen->getFilas(); f++)
+                {
+                    for(int c=0; c<punteroImagen->getColumnas(); c++)
+                    {
+                        pixel = punteroImagen->getPixel(f,c);
+                        R = pixel.getR();
+                        archivo.write((char*)&R, 1);
+                    }
+                }
+            }
+
+            if(ID=="P6")
+            {
+                for(int f=0; f<punteroImagen->getFilas(); f++)
+                {
+                    for(int c=0; c<punteroImagen->getColumnas(); c++)
+                    {
+                        pixel = punteroImagen->getPixel(f,c);
+                        R = pixel.getR();
+                        G = pixel.getG();
+                        B = pixel.getB();
+                        archivo.write((char*)&R, 1);
+                        archivo.write((char*)&G, 1);
+                        archivo.write((char*)&B, 1);
+                    }
+                }
+            }
+            else
+            {
+                cout<<"Error de guardado PNM: ID no valido"<<endl;
+            }
+        }
+        archivo.close();
+    }
 }
 
 PNM::~PNM()

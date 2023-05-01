@@ -1,13 +1,19 @@
 #include "imagen.h"
 
+
+Imagen::Imagen()
+{
+
+}
+
 const string &Imagen::getId() const
 {
-    return id;
+    return ID;
 }
 
 void Imagen::setId(const string &newId)
 {
-    id = newId;
+    ID = newId;
 }
 
 int Imagen::getColumnas() const
@@ -30,14 +36,14 @@ void Imagen::setFilas(unsigned int newFilas)
     filas = newFilas;
 }
 
-float Imagen::getValorMaximo() const
+int Imagen::getValorMaximo() const
 {
-    return valor_max;
+    return valorMaximo;
 }
 
-void Imagen::setValorMaximo(float newValor_max)
+void Imagen::setValorMaximo(int newValorMaximo)
 {
-    valor_max = newValor_max;
+    valorMaximo = newValorMaximo;
 }
 
 const string &Imagen::getMetadatos() const
@@ -48,16 +54,6 @@ const string &Imagen::getMetadatos() const
 void Imagen::setMetadatos(const string &newMetadatos)
 {
     metadatos = newMetadatos;
-}
-
-Imagen::Imagen()
-{
-
-}
-
-Imagen::~Imagen()
-{
-
 }
 
 Pixel Imagen::getPixel(int fila, int columna) const
@@ -115,3 +111,9 @@ void Imagen::redimensionarMatriz()
         matriz[f].resize(columnas);
     }
 }
+
+Imagen::~Imagen()
+{
+
+}
+
